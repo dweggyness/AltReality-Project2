@@ -4,10 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - press1
   - press2
   - press3
   - press4
+=======
+  - Press
+  - Card
+>>>>>>> e1cfb8a0b5b7178298f028b890607726f436d024
   layers:
   - Default
   - TransparentFX
