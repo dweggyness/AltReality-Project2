@@ -31,6 +31,7 @@ public class PhoneController : MonoBehaviour
         phoneRingingAudio.Stop();
         phoneAudio.Play();
 
+        StopCoroutine(playPhoneRingingSound());
         StartCoroutine(turnLightOffAfterDelay());
     }
 
