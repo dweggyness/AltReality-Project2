@@ -25,6 +25,18 @@ public class PhoneControllerOutside : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PlayerBox"))
+        {
+            if (!phoneRung)
+            {
+                ringPhone();
+                phoneRung = true;
+            }
+        }
+    }
+
     private void startPhoneCall()
     {
         lightActivated = true;

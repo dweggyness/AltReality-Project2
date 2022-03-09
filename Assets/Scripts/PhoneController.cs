@@ -13,7 +13,7 @@ public class PhoneController : MonoBehaviour
     private void Awake()
     {
         this.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
-        // StartCoroutine(playPhoneRingingSound());
+        StartCoroutine(playPhoneRingingSound());
     }
 
     public void updatePulledAmount(float t)
