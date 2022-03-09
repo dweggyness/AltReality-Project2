@@ -13,16 +13,24 @@ public class Player : MonoBehaviour
     public MeshRenderer meshRenderer4;
 
 
+
     int[] corectPath = { 1, 2, 3, 4 };
     int current;
+
+
     int[] correctCode = { 7, 6, 4 };
     int[] userCode = new int[3];
-    int currentCode;
+    int currentCode = 0;
+    public MeshRenderer checkerRoom3;
+    public GameObject textField;
 
-    public GameObject door;
+    public GameObject door1;
+    public GameObject door2;
 
-    private Vector3 doorStartPos;
-    public Vector3 doorEndPos;
+    private Vector3 doorStartPos1;
+    public Vector3 doorEndPos1;
+    private Vector3 doorStartPos2;
+    public Vector3 doorEndPos2;
     //public AudioSource beepSound;
     //public AudioSource doorSound;
 
@@ -36,8 +44,10 @@ public class Player : MonoBehaviour
     void Start()
     {
         current = 0;
-        doorStartPos = door.transform.position;
+        doorStartPos1 = door1.transform.position;
+        doorStartPos2 = door2.transform.position;
         StartCoroutine(ClearPath());
+        checkerRoom3.material.color = Color.black;
         
     }
 
@@ -112,7 +122,7 @@ public class Player : MonoBehaviour
             {
                 meshRenderer4.material.color = Color.green;
                 current = 4;
-                StartCoroutine(OpenDoor());
+                StartCoroutine(OpenDoor(door1, doorStartPos1, doorEndPos1));
             }
             else if (current == 4)
             {
@@ -123,7 +133,7 @@ public class Player : MonoBehaviour
 
         }
     }
-    IEnumerator OpenDoor()
+    IEnumerator OpenDoor(GameObject doorObject, Vector3 doorStartPos, Vector3 doorEndPos)
     {
         if (isFirstRun)
         { // delays door opening by 2 seconds
@@ -136,25 +146,62 @@ public class Player : MonoBehaviour
         {
             if (openDoorElapsedTime < openDoorDuration)
             {
-                door.transform.position = Vector3.MoveTowards(doorStartPos, doorEndPos, openDoorElapsedTime*3 / openDoorDuration);
+                doorObject.transform.position = Vector3.MoveTowards(doorStartPos, doorEndPos, openDoorElapsedTime*3 / openDoorDuration);
                 openDoorElapsedTime += Time.deltaTime;
-                Debug.Log(door.transform.position);
+                Debug.Log(doorObject.transform.position);
                 Debug.Log(openDoorElapsedTime);
             }
             else if (openDoorElapsedTime > openDoorDuration)
             {
-                StopCoroutine(OpenDoor());
+                StopCoroutine(OpenDoor(doorObject, doorStartPos, doorEndPos));
             }
             yield return null;
         }
 
     }
 
-    public void OnClick(float t)
+    public void OnClick(int t)
     {
-        if (userCode[2] != null)
-        {
+        string resnow = "";
+        
+        userCode[currentCode] = t;
+        currentCode++;
 
+        //writing the code written by the user into the field
+        for (int i = 0; i < currentCode; i++)
+        {
+            resnow = resnow + userCode[i].ToString();
         }
+        textField.GetComponent<UnityEngine.UI.Text>().text = resnow;
+        if (currentCode == 3)
+        {
+            if (CheckTwoArrays(userCode, correctCode))
+            {
+                StartCoroutine(checkCode(Color.green));
+                OpenDoor(door2, doorStartPos2, doorEndPos2);
+            } else
+            {
+                StartCoroutine(checkCode(Color.red));
+                currentCode = 0;
+                userCode = new int[3];
+                
+            }
+            
+        }
+    }
+    bool CheckTwoArrays(int[] ar1, int[] ar2)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (ar1[i] != ar2[i]) return false;
+        }
+        return true;
+    }
+    IEnumerator checkCode(Color clr)
+    {
+        checkerRoom3.material.color = clr;
+        yield return new WaitForSeconds(2);
+        textField.GetComponent<UnityEngine.UI.Text>().text = "";
+        checkerRoom3.material.color = Color.black;
     }
 }
