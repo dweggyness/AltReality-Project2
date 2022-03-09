@@ -12,15 +12,31 @@ public class Player : MonoBehaviour
     public MeshRenderer meshRenderer3;
     public MeshRenderer meshRenderer4;
 
-    public GameObject door2;
 
     int[] corectPath = { 1, 2, 3, 4 };
     int current;
+    int[] correctCode = { 7, 6, 4 };
+    int[] userCode = new int[3];
+    int currentCode;
+
+    public GameObject door;
+
+    private Vector3 doorStartPos;
+    public Vector3 doorEndPos;
+    //public AudioSource beepSound;
+    //public AudioSource doorSound;
+
+    public float openDoorElapsedTime = 0.0f;
+    public float openDoorDuration = 4.0f;
+    float lerpValue;
+    bool isFirstRun = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
         current = 0;
+        doorStartPos = door.transform.position;
         StartCoroutine(ClearPath());
         
     }
@@ -37,7 +53,7 @@ public class Player : MonoBehaviour
         meshRenderer2.material.color = Color.red;
         meshRenderer3.material.color = Color.red;
         meshRenderer4.material.color = Color.red;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         meshRenderer1.material.color = Color.gray;
         meshRenderer2.material.color = Color.gray;
         meshRenderer3.material.color = Color.gray;
@@ -96,8 +112,7 @@ public class Player : MonoBehaviour
             {
                 meshRenderer4.material.color = Color.green;
                 current = 4;
-                Vector3 now = door2.transform.position;
-                door2.transform.position = new Vector3(now.x, now.y + 50, now.z);
+                StartCoroutine(OpenDoor());
             }
             else if (current == 4)
             {
@@ -105,6 +120,40 @@ public class Player : MonoBehaviour
             }
             else StartCoroutine(ClearPath());
 
+
+        }
+    }
+    IEnumerator OpenDoor()
+    {
+        if (isFirstRun)
+        { // delays door opening by 2 seconds
+            yield return new WaitForSeconds(2);
+            isFirstRun = false;
+        }
+
+        //doorSound.Play();
+        while (true)
+        {
+            if (openDoorElapsedTime < openDoorDuration)
+            {
+                door.transform.position = Vector3.MoveTowards(doorStartPos, doorEndPos, openDoorElapsedTime*3 / openDoorDuration);
+                openDoorElapsedTime += Time.deltaTime;
+                Debug.Log(door.transform.position);
+                Debug.Log(openDoorElapsedTime);
+            }
+            else if (openDoorElapsedTime > openDoorDuration)
+            {
+                StopCoroutine(OpenDoor());
+            }
+            yield return null;
+        }
+
+    }
+
+    public void OnClick(float t)
+    {
+        if (userCode[2] != null)
+        {
 
         }
     }
