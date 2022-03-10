@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
     //public AudioSource beepSound;
     //public AudioSource doorSound;
 
-    public float openDoorElapsedTime = 0.0f;
-    public float openDoorDuration = 4.0f;
+    private float openDoorElapsedTime = 0.0f;
+    private float openDoorDuration = 4.0f;
     float lerpValue;
     bool isFirstRun = true;
 
@@ -146,14 +146,15 @@ public class Player : MonoBehaviour
         {
             if (openDoorElapsedTime < openDoorDuration)
             {
-                doorObject.transform.position = Vector3.MoveTowards(doorStartPos, doorEndPos, openDoorElapsedTime*3 / openDoorDuration);
+                doorObject.transform.localPosition = Vector3.MoveTowards(doorStartPos, doorEndPos, openDoorElapsedTime / openDoorDuration);
                 openDoorElapsedTime += Time.deltaTime;
-                Debug.Log(doorObject.transform.position);
-                Debug.Log(openDoorElapsedTime);
             }
             else if (openDoorElapsedTime > openDoorDuration)
             {
+                isFirstRun = true;
                 StopCoroutine(OpenDoor(doorObject, doorStartPos, doorEndPos));
+                openDoorElapsedTime = 0.0f;
+                openDoorDuration = 4.0f;
             }
             yield return null;
         }
@@ -178,7 +179,7 @@ public class Player : MonoBehaviour
             if (CheckTwoArrays(userCode, correctCode))
             {
                 StartCoroutine(checkCode(Color.green));
-                OpenDoor(door2, doorStartPos2, doorEndPos2);
+                StartCoroutine(OpenDoor(door2, doorStartPos2, doorEndPos2));
             } else
             {
                 StartCoroutine(checkCode(Color.red));
