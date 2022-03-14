@@ -85,3 +85,12 @@ Shyngys:
     }
   ```
   Using the numbers that we made in the code that would work, we just checked the current number and when there are 3 numbers written, they are displayed on the text above the Num Pad and correctly or incorrectly. After a correct input, the door will be opened, however on incorrect input, the same logic as in the Room 2 it will daiplsy red and then after 2 seconds it will be empty and gray.
+
+
+## What we have learned
+- Work with scripts, making object public
+- Understand how the GetComponent in C# works
+- Hwo to make a time delay using StartCouroutine and IEnumerator
+- Working together on one project using GitHub
+- How to build the games to VR Headset
+- How to work with XR VR Interactions
