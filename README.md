@@ -2,7 +2,6 @@
 
 ### You wake up in a white room with only a phone on a desk near you. Suddenly, the phone rings and the voice on the other side of the line tells you that you have 10 minutes to leave the building. You see the timer start on the wall and now the only option left is to follow the rules. Will you be able to surpass this challenge or wait to the time to finish?
 
----
 
 ## Techincal implementation
 Shyngys: 
@@ -20,6 +19,8 @@ Shyngys:
   ```
   
     Afterwards, I thought about how to make the plates interactable. I decided to add the box colider to the plates, edit the collider a little bibt, so that the trigger starts when the player is right on the plate. After that, the only thing left to do was to write the script to understand if the user was correct or not.
+    
+    ---
     ```
     private void OnTriggerEnter(Collider other)
     {
@@ -56,3 +57,4 @@ Shyngys:
         current = 0;
     }
     ```
+    ---
