@@ -59,4 +59,29 @@ Shyngys:
     ```
     ---
 - Room 3
-  After implementing the 
+  After implementing the room 2, the work with room 3 was a less painful. We decided to implememnt the interaction with the Ray and Number Pad. This tutorial: https://www.youtube.com/watch?v=4tW7XpAiuDg really helped me in the Room 3 implementation. Following the video, I decided to also add the canvas buttons for the Number Pad. I found out that we can add the function for click events on buttons right in the Unity Editor. For the logic, this function below is here:
+  ```
+   public void OnClick(int t){
+        string resnow = "";
+        userCode[currentCode] = t;
+        currentCode++;
+
+        //writing the code written by the user into the field
+        for (int i = 0; i < currentCode; i++){
+            resnow = resnow + userCode[i].ToString();
+        }
+        textField.GetComponent<UnityEngine.UI.Text>().text = resnow;
+        if (currentCode == 3){
+            if (CheckTwoArrays(userCode, correctCode)){
+                StartCoroutine(checkCode(Color.green));
+                StartCoroutine(OpenDoor(door2, doorStartPos2, doorEndPos2));
+            } else{
+                StartCoroutine(checkCode(Color.red));
+                currentCode = 0;
+                userCode = new int[3];
+            }
+            
+        }
+    }
+  ```
+  Using the numbers that we made in the code that would work, we just checked the current number and when there are 3 numbers written, they are displayed on the text above the Num Pad and correctly or incorrectly. After a correct input, the door will be opened, however on incorrect input, the same logic as in the Room 2 it will daiplsy red and then after 2 seconds it will be empty and gray.
