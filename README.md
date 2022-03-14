@@ -5,7 +5,7 @@
 
 ## Techincal implementation
 Shyngys: 
-- Room 2 includes the position interaction. There are 4 plates and the user has to press on them with a correct path to open the door to the next room. I implemented it by making the plates public in code, so that it would be easier to assign them in the editor. The following code was for the declaration of the path and of the MeshRenederes
+- **Room 2** includes the position interaction. There are 4 plates and the user has to press on them with a correct path to open the door to the next room. I implemented it by making the plates public in code, so that it would be easier to assign them in the editor. The following code was for the declaration of the path and of the MeshRenederes
   ```
   public MeshRenderer meshRenderer1;
   public MeshRenderer meshRenderer2;
@@ -58,7 +58,7 @@ Shyngys:
     }
     ```
     ---
-- Room 3
+- **Room 3**
   After implementing the room 2, the work with room 3 was a less painful. We decided to implememnt the interaction with the Ray and Number Pad. This tutorial: https://www.youtube.com/watch?v=4tW7XpAiuDg really helped me in the Room 3 implementation. Following the video, I decided to also add the canvas buttons for the Number Pad. I found out that we can add the function for click events on buttons right in the Unity Editor. For the logic, this function below is here:
   ```
    public void OnClick(int t){
