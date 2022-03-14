@@ -58,3 +58,5 @@ Shyngys:
     }
     ```
     ---
+- Room 3
+  After implementing the 
