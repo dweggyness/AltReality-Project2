@@ -130,7 +130,10 @@ I was also proud of my technique of creating the wheat field, as I wanted it to 
 ![Screenshot](https://www.imgur.com/jGKRGjT.png)
 ![Screenshot](https://www.imgur.com/LBnWHGO.png)
 
-
+## Challenges
+- Collaborating in Unity was pretty challenging, perhaps because we used GitHub instead of PlasticSCM. We rolled with GitHub as we were both familiar with the technology, and we didn't want to risk using a new collaboration tool as it opens potential for errors and bugs, and though GitHub worked out, perhaps PlasticSCM might have made collaboration easier in the long run.
+- When we were merging the scenes together, we had some difficulty with the scaling, as Shyngys's scene was way bigger than Jun's. Simply scaling down Shyngys's scene did not work 1:1, as Shyngys's scene was designed for that larger scale, so some parts looked rather off in the combined scene. In the future, we will design off a uniform scale, or draw an architectural plan with dimensions before actually working on the scenes.
+- Learning when to pivot from a planned feature is something we need to improve on. Both me and Shyngys spent a considerable amount of time researching how to work on a planned feature, only to ditch it when we realized it was going to take too much time that we couldn't afford. One such example was the telephone grab interaction, we spent 2 hours collectively looking up how to do it, messing with LineRenderers and stuff simply because we just wanted to 'stick with the plan'. In reality we should've gave up much earlier when we realized how hard it was going to be, and dropped it before investing that much time into an impossible feature ( for our current level anyway ).
 
 ## What we have learned
 - Work with scripts, making object public
